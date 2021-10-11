@@ -30,15 +30,28 @@ public class BookController {
         return ResponseEntity.ok(bookService.getAllBooks());
     }
 
+   
     @GetMapping
-    public ResponseEntity<List<Book>> getAllBooks() {
+    public ResponseEntity <List<Book>> getAllBooks() {
         return ResponseEntity.ok(bookService.getAllBooks());
     }
 
-    @GetMapping("/{isbn}")
-    public ResponseEntity<Book> getBookByISBN(@PathVariable String isbn) {
+
+    @GetMapping("/id/{id}")
+    public ResponseEntity <List<Book>> getBookByID(@PathVariable String id) {
+        return ResponseEntity.ok(bookService.getBookByID(id));
+    }
+    @GetMapping("/isbn/{isbn}")
+    public ResponseEntity <List<Book>> getBookByISBN(@PathVariable String isbn) {
         return ResponseEntity.ok(bookService.getBookByISBN(isbn));
     }
+    @GetMapping("/genre/{genre}")
+    public ResponseEntity <List<Book>> getBookByGENRE(@PathVariable String genre) {
+        return ResponseEntity.ok(bookService.getBooksByGENRE(genre));
+    }
+    
+   
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity deleteBook(@PathVariable String id) {

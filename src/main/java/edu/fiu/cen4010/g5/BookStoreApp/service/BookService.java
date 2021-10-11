@@ -36,10 +36,14 @@ public class BookService {
         return bookRepository.findAll();
     }
 
-    public Book getBookByISBN(String isbn) {
-        return bookRepository.findByISBN(isbn).orElseThrow(() -> new RuntimeException(
-                String.format("Cannot find Book by ISBN %s", isbn)
-        ));
+    public List<Book> getBookByISBN(String isbn) {
+        return bookRepository.findByISBN(isbn);
+    }
+    public List<Book> getBooksByGENRE(String genre) {
+        return bookRepository.findByGENRE(genre);
+    }
+    public List<Book> getBookByID(String id) {
+        return bookRepository.findByID(id);
     }
 
     public void deleteBook(String id) {
