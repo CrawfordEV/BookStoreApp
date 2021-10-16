@@ -80,11 +80,11 @@ public class BookService {
             return booksByAuthor;
         }
     }
-    public Book getBookByPRICE(String PRICE) {
-        return bookRepository.findByISBN(PRICE).orElseThrow(() -> new RuntimeException(
+    //public Book getBookByPRICE(String PRICE) {
+        /*return bookRepository.findByPRICE(PRICE).orElseThrow(() -> new RuntimeException(
                 String.format("Cannot find Book by PRICE %s", PRICE)
-        ));
-    }
+        ));*/
+    //}
 
     public void deleteBook(String id) {
         bookRepository.deleteById(id);
