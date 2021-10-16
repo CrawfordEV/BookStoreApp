@@ -60,5 +60,6 @@ public class RatingController {
     public ResponseEntity getAverageRating(@PathVariable String bookid) {
         return ResponseEntity.ok(ratingService.getAverageRating(bookid));
     }
+    
 
 }

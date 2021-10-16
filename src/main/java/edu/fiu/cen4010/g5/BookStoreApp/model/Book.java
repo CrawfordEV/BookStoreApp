@@ -17,12 +17,15 @@ public class Book {
     private String title;
     @Field("genre")
     private Genre genre;
+    @Field("price") 
+    private String PRICE;
 
-    public Book(String id, String ISBN, String title, Genre genre) {
+    public Book(String id, String ISBN, String title, Genre genre, String PRICE) {
         this.id = id;
         this.ISBN = ISBN;
         this.title = title;
         this.genre = genre;
+        this.PRICE = PRICE;
     }
 
     public String getId() {
@@ -55,5 +58,12 @@ public class Book {
 
     public void setGenre(Genre genre) {
         this.genre = genre;
+    }
+    public String getPrice() {
+        return PRICE;
+    }
+
+    public void setPrice(String PRICE) {
+        this.PRICE = PRICE;
     }
 }

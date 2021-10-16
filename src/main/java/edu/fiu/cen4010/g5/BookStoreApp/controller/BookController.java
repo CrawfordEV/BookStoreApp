@@ -53,7 +53,12 @@ public class BookController {
    
 
 
-    @DeleteMapping("/{id}")
+    @GetMapping("/price/{PRICE}")
+    public ResponseEntity<Book> getBookByPRICE(@PathVariable String PRICE) {
+        return ResponseEntity.ok(bookService.getBookByISBN(PRICE));
+    }
+
+    @DeleteMapping("/id/{id}")
     public ResponseEntity deleteBook(@PathVariable String id) {
         bookService.deleteBook(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

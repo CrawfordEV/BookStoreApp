@@ -45,6 +45,11 @@ public class BookService {
     public List<Book> getBookByID(String id) {
         return bookRepository.findByID(id);
     }
+    public Book getBookByPRICE(String PRICE) {
+        return bookRepository.findByISBN(PRICE).orElseThrow(() -> new RuntimeException(
+                String.format("Cannot find Book by PRICE %s", PRICE)
+        ));
+    }
 
     public void deleteBook(String id) {
         bookRepository.deleteById(id);
