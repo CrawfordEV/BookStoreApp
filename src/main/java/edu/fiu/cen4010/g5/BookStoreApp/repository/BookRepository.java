@@ -17,7 +17,8 @@ public interface BookRepository extends MongoRepository<Book, String> {
     List<Book> findByID(String id);
     @Query(value="{ 'genre' : ?0 }")
     List<Book> findByGENRE(String genre);
-    
+    @Query(value="{ 'PRICE' : ?0 }")
+    List<Book> findByPRICE(String Price);
 
 
     public long count();

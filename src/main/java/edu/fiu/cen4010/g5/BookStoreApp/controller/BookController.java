@@ -55,7 +55,7 @@ public class BookController {
 
     @GetMapping("/price/{PRICE}")
     public ResponseEntity<Book> getBookByPRICE(@PathVariable String PRICE) {
-        return ResponseEntity.ok(bookService.getBookByISBN(PRICE));
+        return ResponseEntity.ok(bookService.getBookByPRICE(PRICE));
     }
 
     @DeleteMapping("/id/{id}")
