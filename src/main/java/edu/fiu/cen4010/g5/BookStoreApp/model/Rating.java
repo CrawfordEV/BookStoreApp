@@ -21,7 +21,6 @@ public class Rating {
     private String date;
     @Field("comment")
     private String comment;
-    private String testfield;
 
     public Rating(String userid, String bookid, int value, String comment) {
         this.userid = userid;
