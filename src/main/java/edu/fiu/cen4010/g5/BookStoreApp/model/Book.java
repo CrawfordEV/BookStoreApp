@@ -22,7 +22,8 @@ public class Book {
     private double price;//
     //-----------------------------
     @Field("author")
-    private Author author;
+    private String author;
+    //private Author author;
     @Field("genre")
     private Genre genre;
     @Field("bookPublisher")
@@ -36,7 +37,7 @@ public class Book {
 
 
     public Book(String id, String ISBN, String title, String description,
-                double price, Author author, Genre genre,
+                double price, /*Author author,*/ String author, Genre genre,
                 String bookPublisher, int publishedYear, /*BookSale copiesSold*/ int copiesSold) {
 
         //10 class instances
@@ -101,12 +102,11 @@ public class Book {
         this.price = price;
     }
 
-    public Author getAuthor(){
-
+    public String getAuthor(){
         return author;
     }
 
-    public void setAuthor(Author author){
+    public void setAuthor(String author){
         this.author = author;
     }
 

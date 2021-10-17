@@ -76,7 +76,6 @@ public class BookController {
     public ResponseEntity <List<Book>> getBookByCOPIESSOLD(@PathVariable int copiesSold) {
         return ResponseEntity.ok(bookService.getBooksByCOPIESSOLD(copiesSold));
     }
-
     @DeleteMapping("/id/{id}")
     public ResponseEntity deleteBook(@PathVariable String id) {
         bookService.deleteBook(id);

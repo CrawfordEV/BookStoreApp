@@ -1,6 +1,6 @@
 
 package edu.fiu.cen4010.g5.BookStoreApp.model;
-
+/*
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -26,7 +26,7 @@ public class Author {
     private String authorPublisher;
 
     public Author(String id, String firstName, String lastName
-            /*, String authorBookList*/, String biography,
+            , String authorBookList, String biography,
                   String authorPublisher){
         this.id = id;
         this.firstName = firstName;
@@ -35,7 +35,7 @@ public class Author {
         this.biography = biography;
         this.authorPublisher = authorPublisher;
     }
-    /*
+
         public Author(String firstName, String lastName){
             this.firstName =firstName;
             this.lastName = lastName;
@@ -47,7 +47,7 @@ public class Author {
         public static String wholeAuthor(String firstName, String lastName){
             return firstName + " " + lastName;
         }
-    */
+
     public String getID(){
         return getID();
     }
@@ -66,13 +66,13 @@ public class Author {
     public void setLastName(String lastName){
         this.lastName = lastName;
     }
-    /*
+
     public String getAuthorBookList(){
         return authorBookList;
     }
     public void setAuthorBookList(String authorBookList){
         this.authorBookList = authorBookList;
-    }*/
+    }
 
     public String getBiography(){
         return biography;
@@ -87,3 +87,4 @@ public class Author {
         this.authorPublisher = authorPublisher;
     }
 }
+*/
