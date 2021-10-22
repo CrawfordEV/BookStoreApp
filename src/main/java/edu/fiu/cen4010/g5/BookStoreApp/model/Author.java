@@ -6,12 +6,12 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document("author")
 public class Author {
-
     @Id
     private String id;
     @Field("firstname")
     private String firstName;
     @Field("lastname")
     private String lastName;
+
 
 }
