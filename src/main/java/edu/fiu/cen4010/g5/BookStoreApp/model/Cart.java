@@ -75,5 +75,4 @@ public class Cart {
         this.totalePrice = totalPrice;
     }
     /////////////////
-    
 }
