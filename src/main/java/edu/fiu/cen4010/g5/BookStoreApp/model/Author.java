@@ -9,9 +9,9 @@ public class Author {
 
     @Id
     private String id;
-    @Field("firstname")
+    @Field("firstName")
     private String firstName;
-    @Field("lastname")
+    @Field("lastName")
     private String lastName;
     //@Field("fullName")
     //private String fullName;
