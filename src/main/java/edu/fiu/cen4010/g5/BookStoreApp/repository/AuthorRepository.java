@@ -9,5 +9,6 @@ import java.util.Optional;
 public interface AuthorRepository extends MongoRepository<Author, String> {
 
     @Query("{'fullName': ?0}")
-    Optional<Author> findByFullName(String fullName);
+    Optional<Author>findByLastName(String lastName);
+    //Optional<Author>findByFullName(String fullName);
 }
