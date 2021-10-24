@@ -36,19 +36,15 @@ public class AuthorService {
     }
 
 
-    public Author getBookByFullName(String fullName) {
+    public Author getAuthorByFullName(String fullName) {
         return authorRepository.findByFullName(fullName).orElseThrow(() -> new RuntimeException(
                 String.format("Cannot find Author by ID %s", fullName)
         ));
     }
+
     public Author getAuthorByLastName(String lastName) {
         return authorRepository.findByLastName(lastName).orElseThrow(() -> new RuntimeException(
-                String.format("Cannot find Author by ID %s", lastName)
-        ));
-    }
-    public Author getAuthorByFullName(String lastName) {
-        return authorRepository.findByLastName(lastName).orElseThrow(() -> new RuntimeException(
-                String.format("Cannot find Author by ID %s", lastName)
+                String.format("Cannot find the Author's last name %s", lastName)
         ));
     }
     public void deleteAuthor(String id) {

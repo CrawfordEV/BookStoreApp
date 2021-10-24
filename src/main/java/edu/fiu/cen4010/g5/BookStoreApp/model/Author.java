@@ -13,7 +13,7 @@ public class Author {
     private String firstName;
     @Field("lastName")
     private String lastName;
-    //@Field("fullName")
+    //no field needed here
     private String fullName;
 
     public Author(String id, String firstName, String lastName){
@@ -23,6 +23,7 @@ public class Author {
         fullName();
         //fullName = firstName + " " + lastName;
     }
+
     //method to show the full name of the author
     public String fullName(){
         return fullName = firstName + " " + lastName;

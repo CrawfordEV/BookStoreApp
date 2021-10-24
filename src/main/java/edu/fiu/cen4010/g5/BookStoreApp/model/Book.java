@@ -5,6 +5,11 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+//nope
+import edu.fiu.cen4010.g5.BookStoreApp.model.Author;
+import edu.fiu.cen4010.g5.BookStoreApp.repository.AuthorRepository;
+import edu.fiu.cen4010.g5.BookStoreApp.service.AuthorService;
+
 @Document("book")
 public class Book {
 
@@ -21,7 +26,11 @@ public class Book {
     //using mongo will allow double, but postman won't.
     //however, postman will allow Double.
     private Double price;
+    /////////////////////////
     //Author goes here
+    @Field("Author")//will work on next
+    private Author author;
+    ///////////////////////
     @Field("genre")
     private Genre genre;
     @Field("bookPublisher")
@@ -33,9 +42,10 @@ public class Book {
     @Field ("copiesSold")
     private Integer copiesSold;
 
+    //private String bookFullName;
 
     public Book(String id, String ISBN, String title,String description,
-                Double price, Genre genre, String bookPublisher,
+                Double price /*, Author author*/, Genre genre, String bookPublisher,
                 Integer publishedYear, Integer copiesSold) {
         this.id = id;
         this.ISBN = ISBN;
@@ -46,7 +56,14 @@ public class Book {
         this.bookPublisher = bookPublisher;
         this.publishedYear = publishedYear;
         this.copiesSold = copiesSold;
+        //nope
+        //authorRepository.findByFullName(fullName)
     }
+    //nope
+   // public String bookFullName(){
+        //authorService.getAuthorByFullName(fullName);
+     //  return null; //bookFullName = Author.fullName();
+    //}
 
     public String getId() {
         return id;
@@ -86,7 +103,7 @@ public class Book {
     public Genre getGenre() {
         return genre;
     }
-
+    //name still needs to be implemented here
     public void setGenre(Genre genre) {
         this.genre = genre;
     }
