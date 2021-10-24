@@ -27,7 +27,7 @@ public class AuthorService {
 
         savedAuthor.setFirstName(author.getFirstName());
         savedAuthor.setLastName(author.getLastName());
-        //savedAuthor.setFullName(author.getFullName());
+        savedAuthor.setFullName(author.getFullName());
         authorRepository.save(savedAuthor);
     }
 
@@ -36,12 +36,17 @@ public class AuthorService {
     }
 
 
-   // public Author getBookByFullName(String fullName) {
-     //   return authorRepository.findByFullName(fullName).orElseThrow(() -> new RuntimeException(
-       //         String.format("Cannot find Author by ID %s", fullName)
-        //));
-    //}
+    public Author getBookByFullName(String fullName) {
+        return authorRepository.findByFullName(fullName).orElseThrow(() -> new RuntimeException(
+                String.format("Cannot find Author by ID %s", fullName)
+        ));
+    }
     public Author getAuthorByLastName(String lastName) {
+        return authorRepository.findByLastName(lastName).orElseThrow(() -> new RuntimeException(
+                String.format("Cannot find Author by ID %s", lastName)
+        ));
+    }
+    public Author getAuthorByFullName(String lastName) {
         return authorRepository.findByLastName(lastName).orElseThrow(() -> new RuntimeException(
                 String.format("Cannot find Author by ID %s", lastName)
         ));

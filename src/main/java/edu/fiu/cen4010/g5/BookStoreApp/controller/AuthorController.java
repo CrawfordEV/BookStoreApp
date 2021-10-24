@@ -35,10 +35,10 @@ public class AuthorController {
         return ResponseEntity.ok(authorService.getAllAuthors());
     }
 
-    //@GetMapping("/{fullName}")
-    //public ResponseEntity<Author> getAuthorByFullName(@PathVariable String fullName) {
-      //  return ResponseEntity.ok(authorService.getAuthorByFullName(fullName));
-   // }
+    @GetMapping("/{fullName}")
+    public ResponseEntity<Author> getAuthorByFullName(@PathVariable String fullName) {
+        return ResponseEntity.ok(authorService.getAuthorByFullName(fullName));
+   }
 
     @GetMapping("/{lastName}")
     public ResponseEntity<Author> getAuthorByLastName(@PathVariable String lastName) {

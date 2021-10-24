@@ -14,16 +14,19 @@ public class Author {
     @Field("lastName")
     private String lastName;
     //@Field("fullName")
-    //private String fullName;
+    private String fullName;
 
     public Author(String id, String firstName, String lastName){
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-
-      //  fullName = firstName + " " + lastName;
+        fullName();
+        //fullName = firstName + " " + lastName;
     }
-
+    //method to show the full name of the author
+    public String fullName(){
+        return fullName = firstName + " " + lastName;
+    }
 
 
     public String getId() {
@@ -50,13 +53,13 @@ public class Author {
         this.lastName = lastName;
     }
 
-    //public String getFullName(){
-      //  return fullName;
-    //}
+    public String getFullName(){
+        return fullName;
+    }
 
-    //public void setFullName(String fullName){
-      //  this.fullName = fullName;
-    //}
+    public void setFullName(String fullName){
+        this.fullName = fullName;
+    }
 
 
 }
