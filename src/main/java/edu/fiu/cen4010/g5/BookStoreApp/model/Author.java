@@ -23,7 +23,10 @@ public class Author {
         fullName();
         //fullName = firstName + " " + lastName;
     }
-
+    //if bookauthor = author
+    //then showbook
+    //or something like that
+    
     //method to show the full name of the author
     public String fullName(){
         return fullName = firstName + " " + lastName;
