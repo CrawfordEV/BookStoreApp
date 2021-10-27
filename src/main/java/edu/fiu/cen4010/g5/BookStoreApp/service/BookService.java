@@ -46,12 +46,13 @@ public class BookService {
                 String.format("Cannot find Book by ISBN %s", isbn)
         ));
     }
+    /*
     public Book getBookByAuthor(String author) {
         return bookRepository.findByAuthor(author).orElseThrow(() -> new RuntimeException(
                 String.format("Cannot find Book by author %s", author)
         ));
     }
-
+*/
     public void deleteBook(String id) {
         bookRepository.deleteById(id);
     }
