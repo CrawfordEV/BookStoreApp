@@ -29,6 +29,7 @@ public class BookService {
         savedBook.setTitle(book.getTitle());
         savedBook.setDescription(book.getDescription());
         savedBook.setPrice(book.getPrice());
+        savedBook.setAuthor(book.getAuthor());
         savedBook.setGenre(book.getGenre());
         savedBook.setBookPublisher(book.getBookPublisher());
         savedBook.setPublishedYear(book.getPublishedYear());
@@ -43,6 +44,11 @@ public class BookService {
     public Book getBookByISBN(String isbn) {
         return bookRepository.findByISBN(isbn).orElseThrow(() -> new RuntimeException(
                 String.format("Cannot find Book by ISBN %s", isbn)
+        ));
+    }
+    public Book getBookByAuthor(String author) {
+        return bookRepository.findByAuthor(author).orElseThrow(() -> new RuntimeException(
+                String.format("Cannot find Book by author %s", author)
         ));
     }
 
