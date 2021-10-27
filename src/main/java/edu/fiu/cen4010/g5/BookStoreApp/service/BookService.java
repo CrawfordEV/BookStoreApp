@@ -29,6 +29,7 @@ public class BookService {
         savedBook.setTitle(book.getTitle());
         savedBook.setDescription(book.getDescription());
         savedBook.setPrice(book.getPrice());
+        savedBook.setAuthor(book.getAuthor());
         savedBook.setGenre(book.getGenre());
         savedBook.setBookPublisher(book.getBookPublisher());
         savedBook.setPublishedYear(book.getPublishedYear());
@@ -45,12 +46,19 @@ public class BookService {
                 String.format("Cannot find Book by ISBN %s", isbn)
         ));
     }
-
+    /*
+    public Book getBookByAuthor(String author) {
+        return bookRepository.findByAuthor(author).orElseThrow(() -> new RuntimeException(
+                String.format("Cannot find Book by author %s", author)
+        ));
+    }
+*/
     public void deleteBook(String id) {
         bookRepository.deleteById(id);
     }
 
 }
+//working on stuff down here
 /*
 public class BookService {
 

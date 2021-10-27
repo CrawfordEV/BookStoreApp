@@ -45,8 +45,14 @@ public class BookController {
         bookService.deleteBook(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+    /*
+    @GetMapping("/{author}")
+    public ResponseEntity<Book> getBookByAuthor(@PathVariable String author){
+        return ResponseEntity.ok(bookService.getBookByAuthor(author));
+    }*/
 
 }
+//working on stuff down here
 /*
 public class BookController {
 
