@@ -43,12 +43,18 @@ public class AuthorService {
                 String.format("Cannot find Author by ID %s", fullName)
         ));
     }
+/*
+    //problem here, I cannot have a getAuthorByFullName
+    //and a getAuthorByLastName
+    //it confuses the fetcher.
 
     public Author getAuthorByLastName(String lastName) {
         return authorRepository.findByLastName(lastName).orElseThrow(() -> new RuntimeException(
                 String.format("Cannot find the Author's last name %s", lastName)
         ));
     }
+    */
+
     public void deleteAuthor(String id) {
         authorRepository.deleteById(id);
     }

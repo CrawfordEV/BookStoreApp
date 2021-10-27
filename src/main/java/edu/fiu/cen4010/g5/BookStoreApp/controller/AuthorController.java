@@ -14,8 +14,7 @@ public class AuthorController {
 
     private final AuthorService authorService;
 
-    public AuthorController(AuthorService authorService) {
-        this.authorService = authorService;
+    public AuthorController(AuthorService authorService) {this.authorService = authorService;
     }
 
     @PostMapping
@@ -34,12 +33,12 @@ public class AuthorController {
     public ResponseEntity<List<Author>> getAllAuthors() {
         return ResponseEntity.ok(authorService.getAllAuthors());
     }
-
+/*
     @GetMapping("/{lastName}")
     public ResponseEntity<Author> getAuthorByLastName(@PathVariable String lastName) {
         return ResponseEntity.ok(authorService.getAuthorByLastName(lastName));
     }
-
+*/
     @GetMapping("/{fullName}")
     public ResponseEntity<Author> getAuthorByFullName(@PathVariable String fullName) {
         return ResponseEntity.ok(authorService.getAuthorByFullName(fullName));

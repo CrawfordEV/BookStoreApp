@@ -8,8 +8,8 @@ import java.util.Optional;
 
 public interface AuthorRepository extends MongoRepository<Author, String> {
 
-    @Query("{'lastName': ?0}")
-    Optional<Author>findByLastName(String lastName);
+    //@Query("{'lastName': ?0}")
+    //Optional<Author>findByLastName(String lastName);
     @Query("{'fullName': ?0}")
     Optional<Author>findByFullName(String fullName);
 }
