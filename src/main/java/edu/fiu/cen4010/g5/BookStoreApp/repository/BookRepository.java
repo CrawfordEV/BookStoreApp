@@ -11,7 +11,14 @@ public interface BookRepository extends MongoRepository<Book, String> {
     @Query("{'isbn': ?0}")
     Optional<Book> findByISBN(String isbn);
 
+    //problem here, I cannot have a getAuthorByFullName
+    //and a getAuthorByLastName
+    //it confuses the fetcher.
+    //@Query("{'author': ?0}")
+    //Optional<Book> findByAuthor(String author);
+
 }
+//working on stuff down here
 /*
 package edu.fiu.cen4010.g5.BookStoreApp.repository;
 
