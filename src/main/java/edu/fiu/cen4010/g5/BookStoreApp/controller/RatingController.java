@@ -50,6 +50,11 @@ public class RatingController {
         return ResponseEntity.ok(ratingService.getRatingsByBookSortedDes(bookid));
     }
 
+    @GetMapping("/bybook/sorted/lowest/{bookid}")
+    public ResponseEntity<List<Rating>> getRatingsByBookSortedAsc(@PathVariable String bookid) {
+        return ResponseEntity.ok(ratingService.getRatingsByBookSortedAsc(bookid));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity deleteRating(@PathVariable String id) {
         ratingService.deleteRating(id);
@@ -59,10 +64,6 @@ public class RatingController {
     @GetMapping("/avg/{bookid}")
     public ResponseEntity getAverageRating(@PathVariable String bookid) {
         return ResponseEntity.ok(ratingService.getAverageRating(bookid));
-    }
-    @GetMapping("/PRICE/{PRICE}")
-    public ResponseEntity PRICE(@PathVariable String PRICE) {
-        return ResponseEntity.ok(ratingService.getAverageRating(PRICE));
     }
 
 }
