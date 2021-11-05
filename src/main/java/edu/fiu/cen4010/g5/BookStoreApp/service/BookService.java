@@ -1,6 +1,5 @@
 package edu.fiu.cen4010.g5.BookStoreApp.service;
 
-import edu.fiu.cen4010.g5.BookStoreApp.model.Author;
 import edu.fiu.cen4010.g5.BookStoreApp.model.Book;
 import edu.fiu.cen4010.g5.BookStoreApp.repository.BookRepository;
 import org.springframework.stereotype.Service;
@@ -30,7 +29,7 @@ public class BookService {
         savedBook.setTitle(book.getTitle());
         savedBook.setDescription(book.getDescription());
         savedBook.setPrice(book.getPrice());
-        savedBook.setAuthor(book.getAuthor());
+        savedBook.setAuthorIDs(book.getAuthorIDs());
         savedBook.setGenre(book.getGenre());
         savedBook.setBookPublisher(book.getBookPublisher());
         savedBook.setPublishedYear(book.getPublishedYear());
@@ -48,19 +47,22 @@ public class BookService {
         ));
     }
 
-    public List<Book> getBookByAuthor(Author author) {
+    public List<Book> getBookByAuthor(String authorID) {
 
         List<Book> allBooks = getAllBooks();
         List<Book> booksByAuthor = null;
 
         for (Book book : allBooks) {
-            if (book.getAuthor().contains(author)) {
-                booksByAuthor.add(book);
+            for (String id : book.getAuthorIDs()) {
+                if (id.equals(authorID)) {
+                    booksByAuthor.add(book);
+                    continue;
+                }
             }
         }
 
         if (booksByAuthor.isEmpty()) {
-            throw new RuntimeException(String.format("Cannot find Book by author %s", author));
+            throw new RuntimeException(String.format("Cannot find Book by author with ID " + authorID));
         }
         else {
             return booksByAuthor;
