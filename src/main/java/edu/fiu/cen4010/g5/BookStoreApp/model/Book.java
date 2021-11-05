@@ -5,10 +5,9 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.ArrayList;
+
 //nope
-import edu.fiu.cen4010.g5.BookStoreApp.model.Author;
-import edu.fiu.cen4010.g5.BookStoreApp.repository.AuthorRepository;
-import edu.fiu.cen4010.g5.BookStoreApp.service.AuthorService;
 
 @Document("book")
 public class Book {
@@ -29,7 +28,7 @@ public class Book {
     /////////////////////////
     //Author goes here
     @Field("author")//will work on next
-    private String author;
+    private ArrayList<Author> author;
     ///////////////////////
     @Field("genre")
     private Genre genre;
@@ -45,7 +44,7 @@ public class Book {
     //private String bookFullName;
 
     public Book(String id, String ISBN, String title,String description,
-                Double price, String author, Genre genre, String bookPublisher,
+                Double price, ArrayList<Author> author, Genre genre, String bookPublisher,
                 Integer publishedYear, Integer copiesSold) {
         this.id = id;
         this.ISBN = ISBN;
@@ -101,10 +100,10 @@ public class Book {
     public void setPrice(Double price) {
         this.price = price;
     }
-    public String getAuthor(){
+    public ArrayList<Author> getAuthor(){
         return author;
     }
-    public void setAuthor(String author){
+    public void setAuthor(ArrayList<Author> author){
         this.author = author;
     }
     public Genre getGenre() {

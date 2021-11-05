@@ -1,5 +1,6 @@
 package edu.fiu.cen4010.g5.BookStoreApp.controller;
 
+import edu.fiu.cen4010.g5.BookStoreApp.model.Author;
 import edu.fiu.cen4010.g5.BookStoreApp.model.Book;
 import edu.fiu.cen4010.g5.BookStoreApp.service.BookService;
 import org.springframework.http.HttpStatus;
@@ -35,9 +36,14 @@ public class BookController {
         return ResponseEntity.ok(bookService.getAllBooks());
     }
 
-    @GetMapping("/{isbn}")
+    @GetMapping("/byISBN/{isbn}")
     public ResponseEntity<Book> getBookByISBN(@PathVariable String isbn) {
         return ResponseEntity.ok(bookService.getBookByISBN(isbn));
+    }
+
+    @GetMapping("/byAuthor/{author}")
+    public ResponseEntity<List<Book>> getBookByAuthor(@PathVariable Author author) {
+        return ResponseEntity.ok(bookService.getBookByAuthor(author));
     }
 
     @DeleteMapping("/{id}")

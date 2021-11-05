@@ -1,5 +1,6 @@
 package edu.fiu.cen4010.g5.BookStoreApp.service;
 
+import edu.fiu.cen4010.g5.BookStoreApp.model.Author;
 import edu.fiu.cen4010.g5.BookStoreApp.model.Book;
 import edu.fiu.cen4010.g5.BookStoreApp.repository.BookRepository;
 import org.springframework.stereotype.Service;
@@ -46,13 +47,27 @@ public class BookService {
                 String.format("Cannot find Book by ISBN %s", isbn)
         ));
     }
-    /*
-    public Book getBookByAuthor(String author) {
-        return bookRepository.findByAuthor(author).orElseThrow(() -> new RuntimeException(
-                String.format("Cannot find Book by author %s", author)
-        ));
+
+    public List<Book> getBookByAuthor(Author author) {
+
+        List<Book> allBooks = getAllBooks();
+        List<Book> booksByAuthor = null;
+
+        for (Book book : allBooks) {
+            if (book.getAuthor().contains(author)) {
+                booksByAuthor.add(book);
+            }
+        }
+
+        if (booksByAuthor.isEmpty()) {
+            throw new RuntimeException(String.format("Cannot find Book by author %s", author));
+        }
+        else {
+            return booksByAuthor;
+        }
+
     }
-*/
+
     public void deleteBook(String id) {
         bookRepository.deleteById(id);
     }
