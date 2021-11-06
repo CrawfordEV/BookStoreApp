@@ -111,6 +111,23 @@ public class BookService {
     }
 
 
+    public List<Book> getSubset(int quantity, int position) {
+
+        List<Book> allBooks = getAllBooks();
+
+        if (position >= allBooks.size()) {
+            throw new RuntimeException("This starting position exceeds the size of the collection");
+        }
+
+        List<Book> subSet = new ArrayList<Book>();
+
+        for (int i = position; (i < allBooks.size()) && quantity > 0;  i++) {
+            subSet.add(allBooks.get(i));
+            --quantity;
+        }
+
+        return subSet;
+    }
 }
 //working on stuff down here
 /*

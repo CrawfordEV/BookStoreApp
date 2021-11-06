@@ -55,6 +55,11 @@ public class BookController {
         return ResponseEntity.ok(bookService.getBooksWithAvgRatingHigherThan(value));
     }
 
+    @GetMapping("/by/{quantity}/from/{position}")
+    public ResponseEntity<List<Book>> getSubset(@PathVariable int quantity, @PathVariable int position) {
+        return ResponseEntity.ok(bookService.getSubset(quantity, position));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity deleteBook(@PathVariable String id) {
         bookService.deleteBook(id);
