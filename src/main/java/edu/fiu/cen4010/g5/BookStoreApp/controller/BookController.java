@@ -45,6 +45,11 @@ public class BookController {
         return ResponseEntity.ok(bookService.getBookByAuthor(authorID));
     }
 
+    @GetMapping("/isvalid/{id}")
+    public boolean validateBook(@PathVariable String id) {
+        return bookService.validateBook(id);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity deleteBook(@PathVariable String id) {
         bookService.deleteBook(id);

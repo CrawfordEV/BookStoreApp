@@ -74,6 +74,14 @@ public class BookService {
         bookRepository.deleteById(id);
     }
 
+    public boolean validateBook(String id) {
+        // query the database for books with this id
+        List<Book> repositoryResults = bookRepository.findByBookId(id).get();
+
+        // return true if there is a book with this id, and false if not
+        return !repositoryResults.isEmpty();
+    }
+
 }
 //working on stuff down here
 /*

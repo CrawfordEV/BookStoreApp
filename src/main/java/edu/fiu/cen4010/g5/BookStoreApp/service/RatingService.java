@@ -5,6 +5,7 @@ import edu.fiu.cen4010.g5.BookStoreApp.model.RatingSortedByValueAsc;
 import edu.fiu.cen4010.g5.BookStoreApp.model.RatingSortedByValueDes;
 import edu.fiu.cen4010.g5.BookStoreApp.repository.RatingRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,15 @@ public class RatingService {
 
     public void addRating(Rating rating) {
 
-        // TODO: Validate user and book from other features (dependencies)
+        // validate the user through a call to the User Controller
+        if (!isUserValid(rating.getUserid())) {
+            throw new RuntimeException(String.format("User with ID %s is invalid!", rating.getUserid()));
+        }
+
+        // validate the book through a call to the Book Controller
+        if (!isBookValid(rating.getBookid())) {
+            throw new RuntimeException(String.format("Book with ID %s is invalid!", rating.getBookid()));
+        }
 
         // validate the value passed for the rating (1-5 stars)
         int v = rating.getValue();
@@ -64,7 +73,15 @@ public class RatingService {
 
     public void updateRating(Rating rating) {
 
-//        TODO: Validate user and book from other features (dependencies)
+        // validate the user through a call to the User Controller
+        if (!isUserValid(rating.getUserid())) {
+            throw new RuntimeException(String.format("User with ID %s is invalid!", rating.getUserid()));
+        }
+
+        // validate the book through a call to the Book Controller
+        if (!isBookValid(rating.getBookid())) {
+            throw new RuntimeException(String.format("Book with ID %s is invalid!", rating.getBookid()));
+        }
 
         // validate the value passed for the rating (1-5 stars)
         int v = rating.getValue();
@@ -117,11 +134,6 @@ public class RatingService {
             }
         }
 
-//        Rating savedRating = ratingRepository.findByUserIdAndBookId(rating.getUserid(), rating.getBookid())
-//                .orElseThrow(() -> new RuntimeException(
-//                        String.format("Cannot Find Rating for Book ID %s by User ID %s", rating.getBookid(), rating.getUserid())
-//                ));
-
     }
 
     public List<Rating> getAllRatings() {
@@ -129,7 +141,11 @@ public class RatingService {
     }
 
     public List<Rating> getRatingsByUser(String userId) {
-        // TODO: validate user
+
+        // validate the user through a call to the User Controller
+        if (!isUserValid(userId)) {
+            throw new RuntimeException(String.format("User with ID %s is invalid!", userId));
+        }
 
         return ratingRepository.findByUserId(userId).orElseThrow(() -> new RuntimeException(
                 String.format("Cannot find Ratings by User %s", userId)
@@ -137,7 +153,11 @@ public class RatingService {
     }
 
     public List<Rating> getRatingsByBook(String bookId) {
-        // TODO: validate book
+
+        // validate the book through a call to the Book Controller
+        if (!isBookValid(bookId)) {
+            throw new RuntimeException(String.format("Book with ID %s is invalid!", bookId));
+        }
 
         return ratingRepository.findByBookId(bookId).orElseThrow(() -> new RuntimeException(
                 String.format("Cannot find Ratings for Book %s", bookId)
@@ -164,6 +184,26 @@ public class RatingService {
 
     public void deleteRating(String id) {
         ratingRepository.deleteById(id);
+    }
+
+    private boolean isUserValid(String userID) {
+
+        // This path should ultimately be set based on production server installation/configuration, not hard coded
+        String uri = "http://localhost:8080/api/user/isvalid/";
+        uri += userID;
+
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(uri, boolean.class);
+    }
+
+    private boolean isBookValid(String bookID) {
+
+        // This path should ultimately be set based on production server installation/configuration, not hard coded
+        String uri = "http://localhost:8080/api/book/isvalid/";
+        uri += bookID;
+
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(uri, boolean.class);
     }
 
     public float getAverageRating(String bookid) {

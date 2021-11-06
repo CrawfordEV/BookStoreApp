@@ -1,6 +1,7 @@
 package edu.fiu.cen4010.g5.BookStoreApp.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -11,8 +12,10 @@ public class Rating {
 
     @Id
     private String id;
+    @Indexed
     @Field("userid")
     private String userid;
+    @Indexed
     @Field("bookid")
     private String bookid;
     @Field("value")
