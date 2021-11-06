@@ -3,7 +3,9 @@ package edu.fiu.cen4010.g5.BookStoreApp.service;
 import edu.fiu.cen4010.g5.BookStoreApp.model.Book;
 import edu.fiu.cen4010.g5.BookStoreApp.repository.BookRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,7 +31,7 @@ public class BookService {
         savedBook.setTitle(book.getTitle());
         savedBook.setDescription(book.getDescription());
         savedBook.setPrice(book.getPrice());
-        savedBook.setAuthorIDs(book.getAuthorIDs());
+        savedBook.setAuthorids(book.getAuthorids());
         savedBook.setGenre(book.getGenre());
         savedBook.setBookPublisher(book.getBookPublisher());
         savedBook.setPublishedYear(book.getPublishedYear());
@@ -53,7 +55,7 @@ public class BookService {
         List<Book> booksByAuthor = null;
 
         for (Book book : allBooks) {
-            for (String id : book.getAuthorIDs()) {
+            for (String id : book.getAuthorids()) {
                 if (id.equals(authorID)) {
                     booksByAuthor.add(book);
                     continue;
@@ -81,6 +83,33 @@ public class BookService {
         // return true if there is a book with this id, and false if not
         return !repositoryResults.isEmpty();
     }
+
+    public List<Book> getBooksWithAvgRatingHigherThan(float value) {
+
+        List<Book> allBooks = getAllBooks();
+
+        // this is the list of all books where the average rating was higher than the value passed as a parameter
+        List<Book> bookMatches = new ArrayList<Book>();
+
+        for (Book book : allBooks) {
+            if (bookAvgValue(book.getId()) >= value) {
+                bookMatches.add(book);
+            }
+        }
+
+        return bookMatches;
+    }
+
+    private float bookAvgValue(String bookID) {
+
+        // This path should ultimately be set based on production server installation/configuration, not hard coded
+        String uri = "http://localhost:8080/api/rating/avg/";
+        uri += bookID;
+
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(uri, float.class);
+    }
+
 
 }
 //working on stuff down here

@@ -28,7 +28,7 @@ public class Book {
     /////////////////////////
     //Author goes here
     @Field("author")//will work on next
-    private ArrayList<String> authorIDs;
+    private ArrayList<String> authorids;
     ///////////////////////
     @Field("genre")
     private Genre genre;
@@ -44,14 +44,14 @@ public class Book {
     //private String bookFullName;
 
     public Book(String id, String ISBN, String title, String description,
-                Double price, ArrayList<String> authorIDs, Genre genre, String bookPublisher,
+                Double price, ArrayList<String> authorids, Genre genre, String bookPublisher,
                 Integer publishedYear, Integer copiesSold) {
         this.id = id;
         this.ISBN = ISBN;
         this.title = title;
         this.description = description;
         this.price = price;
-        this.authorIDs = authorIDs;
+        this.authorids = authorids;
         this.genre = genre;
         this.bookPublisher = bookPublisher;
         this.publishedYear = publishedYear;
@@ -100,11 +100,11 @@ public class Book {
     public void setPrice(Double price) {
         this.price = price;
     }
-    public ArrayList<String> getAuthorIDs(){
-        return authorIDs;
+    public ArrayList<String> getAuthorids(){
+        return authorids;
     }
-    public void setAuthorIDs(ArrayList<String> authorIDs){
-        this.authorIDs = authorIDs;
+    public void setAuthorids(ArrayList<String> authorids){
+        this.authorids = authorids;
     }
     public Genre getGenre() {
         return genre;

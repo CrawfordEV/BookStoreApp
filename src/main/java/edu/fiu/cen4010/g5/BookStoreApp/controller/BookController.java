@@ -50,6 +50,11 @@ public class BookController {
         return bookService.validateBook(id);
     }
 
+    @GetMapping("/ratinghigherthan/{value}")
+    public ResponseEntity<List<Book>> getBooksWithRatingAvgHigherThan(@PathVariable float value) {
+        return ResponseEntity.ok(bookService.getBooksWithAvgRatingHigherThan(value));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity deleteBook(@PathVariable String id) {
         bookService.deleteBook(id);
