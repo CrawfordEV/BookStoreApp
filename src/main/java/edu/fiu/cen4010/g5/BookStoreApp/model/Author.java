@@ -9,10 +9,10 @@ public class Author {
 
     @Id
     private String id;
-    @Field("firstName")
-    private String firstName;
-    @Field("lastName")
-    private String lastName;
+    @Field("firstname")
+    private String firstname;
+    @Field("lastname")
+    private String lastname;
     @Field("biography")
     private String biography;
     @Field("publisher")
@@ -20,22 +20,16 @@ public class Author {
     //no field needed here
     private String fullName;
 
-    public Author(String id, String firstName, String lastName, String biography, String publisher){
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Author(String firstname, String lastname, String biography, String publisher) {
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.biography = biography;
         this.publisher = publisher;
-        fullName();
-        //fullName = firstName + " " + lastName;
+        this.fullName = fullName();
     }
-    //if bookauthor = author
-    //then showbook
-    //or something like that
 
-    //method to show the full name of the author
     public String fullName(){
-        return fullName = firstName + " " + lastName;
+        return firstname + " " + lastname;
     }
 
     public String getId() {
@@ -46,31 +40,34 @@ public class Author {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getBiography(){
         return biography;
     }
+
     public void setBiography(String biography){
         this.biography = biography;
     }
+
     public String getPublisher(){
         return publisher;
     }
+
     public void setPublisher(String publisher){
         this.publisher = publisher;
     }

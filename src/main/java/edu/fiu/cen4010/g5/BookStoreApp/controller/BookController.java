@@ -36,13 +36,13 @@ public class BookController {
     }
 
     @GetMapping("/byISBN/{isbn}")
-    public ResponseEntity<Book> getBookByISBN(@PathVariable String isbn) {
+    public ResponseEntity<List<Book>> getBookByISBN(@PathVariable String isbn) {
         return ResponseEntity.ok(bookService.getBookByISBN(isbn));
     }
 
     @GetMapping("/byAuthor/{author}")
-    public ResponseEntity<List<Book>> getBookByAuthor(@PathVariable String authorID) {
-        return ResponseEntity.ok(bookService.getBookByAuthor(authorID));
+    public ResponseEntity<List<Book>> getBooksByAuthor(@PathVariable String author) {
+        return ResponseEntity.ok(bookService.getBooksByAuthor(author));
     }
 
     @GetMapping("/isvalid/{id}")
@@ -66,13 +66,4 @@ public class BookController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-
-    //problem here, I cannot have a getAuthorByFullName
-    //and a getAuthorByLastName
-    //it confuses the fetcher.
-
-    //@GetMapping("/{author}")
-    //public ResponseEntity<Book> getBookByAuthor(@PathVariable String author){
-     //   return ResponseEntity.ok(bookService.getBookByAuthor(author));
-    //}
 }

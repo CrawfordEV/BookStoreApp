@@ -18,24 +18,34 @@ public class BookService {
     }
 
     public void addBook(Book book) {
+        // TODO: You should validate that the book doesn't already exist in the collection
+        // TODO: You could also add extra validations, like checking all of the authors are valid or
+        // TODO: the year is equal to or less than the current year
+
         bookRepository.insert(book);
     }
 
     public void updateBook(Book book) {
-        Book savedBook = bookRepository.findById(book.getId())
-                .orElseThrow(() -> new RuntimeException(
-                        String.format("Cannot Find Book by ID %s", book.getId())
-                ));
+        // TODO: Again, you can validate information being passed before updating a record
+
+        List<Book> searchResults = bookRepository.findByBookId(book.getId()).get();
+
+        if (searchResults.isEmpty()) {
+            throw new RuntimeException(String.format("Cannot Find Book by ID %s", book.getId()));
+        }
+
+        Book savedBook = searchResults.get(0);
 
         savedBook.setISBN(book.getISBN());
         savedBook.setTitle(book.getTitle());
         savedBook.setDescription(book.getDescription());
         savedBook.setPrice(book.getPrice());
-        savedBook.setAuthorids(book.getAuthorids());
+        savedBook.setAuthors(book.getAuthors());
         savedBook.setGenre(book.getGenre());
-        savedBook.setBookPublisher(book.getBookPublisher());
-        savedBook.setPublishedYear(book.getPublishedYear());
-        savedBook.setCopiesSold(book.getCopiesSold());
+        savedBook.setPublisher(book.getPublisher());
+        savedBook.setYearPublished(book.getYearPublished());
+        savedBook.setNumSold(book.getNumSold());
+
         bookRepository.save(savedBook);
     }
 
@@ -43,33 +53,32 @@ public class BookService {
         return bookRepository.findAll();
     }
 
-    public Book getBookByISBN(String isbn) {
+    public List<Book> getBookByISBN(String isbn) {
         return bookRepository.findByISBN(isbn).orElseThrow(() -> new RuntimeException(
                 String.format("Cannot find Book by ISBN %s", isbn)
         ));
     }
 
-    public List<Book> getBookByAuthor(String authorID) {
+    public List<Book> getBooksByAuthor(String authorID) {
 
         List<Book> allBooks = getAllBooks();
-        List<Book> booksByAuthor = null;
+        List<Book> booksByAuthor = new ArrayList<Book>();
 
         for (Book book : allBooks) {
-            for (String id : book.getAuthorids()) {
+            for (String id : book.getAuthors()) {
                 if (id.equals(authorID)) {
                     booksByAuthor.add(book);
-                    continue;
+                    break;
                 }
             }
         }
 
         if (booksByAuthor.isEmpty()) {
-            throw new RuntimeException(String.format("Cannot find Book by author with ID " + authorID));
+            throw new RuntimeException(String.format("Cannot find any Books by Author with ID " + authorID));
         }
         else {
             return booksByAuthor;
         }
-
     }
 
     public void deleteBook(String id) {
@@ -129,79 +138,5 @@ public class BookService {
         return subSet;
     }
 }
-//working on stuff down here
-/*
-public class BookService {
-
-    private final BookRepository bookRepository;
-
-    public BookService(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
-    }
-
-    public void addBook(Book book) {
-        bookRepository.insert(book);
-    }
-
-    public void updateBook(Book book) {
-        Book savedBook = bookRepository.findById(book.getId())
-                .orElseThrow(() -> new RuntimeException(
-                        String.format("Cannot Find Book by ID %s", book.getId())
-                ));
-
-        savedBook.setISBN(book.getISBN());
-        savedBook.setTitle(book.getTitle());
-        savedBook.setDescription(book.getDescription());
-        savedBook.setPrice(book.getPrice());
-        savedBook.setAuthor(book.getAuthor());
-        savedBook.setGenre(book.getGenre());
-        savedBook.setBookPublisher(book.getBookPublisher());
-        savedBook.setPublishedYear(book.getPublishedYear());
-        savedBook.setCopesSold(book.getCopiesSold());
-        bookRepository.save(savedBook);
-    }
-
-    public List<Book> getAllBooks() {
-        return bookRepository.findAll();
-    }
-    public List<Book> getBookByID(String id) {
-        return bookRepository.findByID(id);
-    }
-    public List<Book> getBookByISBN(String isbn) {
-        return bookRepository.findByISBN(isbn);
-    }
-    public List<Book> getBooksByTITLE(String title){return bookRepository.findByTITLE(title);}
-    public List<Book> getBookByDESCRIPTION(String description) {
-        return bookRepository.findByDESCRIPTION(description);
-    }
-    public List<Book> getBooksByPRICE(double price) {
-        return bookRepository.findByPRICE(price);
-    }
-    public List<Book> getBooksByAUTHOR(String author) {
-        return bookRepository.findByAUTHOR(author);
-    }
-    public List<Book> getBooksByGENRE(String genre) {
-        return bookRepository.findByGENRE(genre);
-    }
-    public List<Book> getBooksByBOOKPUBLISHER(String publisher) {
-        return bookRepository.findByBOOKPUBLISHER(publisher);
-    }
-    public List<Book> getBooksByPUBLISHEDYEAR(int publishedYear) {
-        return bookRepository.findByPUBLISHEDYEAR(publishedYear);
-    }
-    public List<Book> getBooksByCOPIESSOLD(int copiesSold) {
-        return bookRepository.findByCOPIESSOLD(copiesSold);
-    }
-    //public Book getBookByPRICE(String PRICE) {
-        /*return bookRepository.findByPRICE(PRICE).orElseThrow(() -> new RuntimeException(
-                String.format("Cannot find Book by PRICE %s", PRICE)
-        ));
-    //}
-
-    //public void deleteBook(String id) {
-      //  bookRepository.deleteById(id);
-   // }
-
-}*/
 
 

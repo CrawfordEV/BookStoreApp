@@ -4,10 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-
 import java.util.ArrayList;
-
-//nope
 
 @Document("book")
 public class Book {
@@ -16,54 +13,38 @@ public class Book {
     private String id;
     @Field("isbn")
     @Indexed(unique = true)
-    private String ISBN;
+    private String isbn;
     @Field("title")
     private String title;
     @Field("description")
     private String description;
     @Field("price")
-    //using mongo will allow double, but postman won't.
-    //however, postman will allow Double.
-    private Double price;
-    /////////////////////////
-    //Author goes here
-    @Field("author")//will work on next
-    private ArrayList<String> authorids;
-    ///////////////////////
+    private float price;
+    @Field("authors")
+    private ArrayList<String> authors;
     @Field("genre")
     private Genre genre;
-    @Field("bookPublisher")
-    private String bookPublisher;
-    @Field("publishedYear")
-    //if I use int for year, mongo will save the data,
-    //but postman won't read it
-    private Integer publishedYear;
-    @Field ("copiesSold")
-    private Integer copiesSold;
+    @Field("publisher")
+    private String publisher;
+    @Field("yearpublished")
+    private String yearpublished;
+    @Field ("numsold")
+    private long numsold;
 
-    //private String bookFullName;
+    public Book(String isbn, String title, String description,
+                float price, ArrayList<String> authors, Genre genre, String publisher,
+                String yearpublished, long numsold) {
 
-    public Book(String id, String ISBN, String title, String description,
-                Double price, ArrayList<String> authorids, Genre genre, String bookPublisher,
-                Integer publishedYear, Integer copiesSold) {
-        this.id = id;
-        this.ISBN = ISBN;
+        this.isbn = isbn;
         this.title = title;
         this.description = description;
         this.price = price;
-        this.authorids = authorids;
+        this.authors = authors;
         this.genre = genre;
-        this.bookPublisher = bookPublisher;
-        this.publishedYear = publishedYear;
-        this.copiesSold = copiesSold;
-        //nope
-        //authorRepository.findByFullName(fullName)
+        this.publisher = publisher;
+        this.yearpublished = yearpublished;
+        this.numsold = numsold;
     }
-    //nope
-   // public String bookFullName(){
-        //authorService.getAuthorByFullName(fullName);
-     //  return null; //bookFullName = Author.fullName();
-    //}
 
     public String getId() {
         return id;
@@ -74,11 +55,11 @@ public class Book {
     }
 
     public String getISBN() {
-        return ISBN;
+        return isbn;
     }
 
-    public void setISBN(String ISBN) {
-        this.ISBN = ISBN;
+    public void setISBN(String isbn) {
+        this.isbn = isbn;
     }
 
     public String getTitle() {
@@ -88,51 +69,61 @@ public class Book {
     public void setTitle(String title) {
         this.title = title;
     }
-    public String getDescription(){
+
+    public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
-    public Double getPrice(){
+
+    public float getPrice() {
         return price;
     }
-    public void setPrice(Double price) {
+
+    public void setPrice(float price) {
         this.price = price;
     }
-    public ArrayList<String> getAuthorids(){
-        return authorids;
+
+    public ArrayList<String> getAuthors() {
+        return authors;
     }
-    public void setAuthorids(ArrayList<String> authorids){
-        this.authorids = authorids;
+
+    public void setAuthors(ArrayList<String> authors) {
+        this.authors = authors;
     }
+
     public Genre getGenre() {
         return genre;
     }
-    //name still needs to be implemented here
+
     public void setGenre(Genre genre) {
         this.genre = genre;
     }
-    public String getBookPublisher(){
 
-        return bookPublisher;
-    }
-    public void setBookPublisher(String bookPublisher){
-        this.bookPublisher = bookPublisher;
-    }
-    public Integer getPublishedYear(){
-        return publishedYear;
-    }
-    public void setPublishedYear(Integer publishedYear){
-        this.publishedYear = publishedYear;
+    public String getPublisher() {
+        return publisher;
     }
 
-    public Integer getCopiesSold(){
-        return copiesSold;
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
     }
 
-    public void setCopiesSold(Integer copiesSold){
-        this.copiesSold = copiesSold;
+    public String getYearPublished() {
+        return yearpublished;
+    }
+
+    public void setYearPublished(String yearpublished) {
+        this.yearpublished = yearpublished;
+    }
+
+    public long getNumSold() {
+        return numsold;
+    }
+
+    public void setNumSold(long numsold) {
+        this.numsold = numsold;
     }
 
     //@Override
