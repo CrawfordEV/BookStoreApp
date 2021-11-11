@@ -2,10 +2,14 @@ package edu.fiu.cen4010.g5.BookStoreApp.model;
 
 
 
+import java.util.List;
+
+
+
 //import java.util.ArrayList;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
+//import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -15,24 +19,22 @@ public class Cart {
 
     @Id
     private String id;
-    @Field("userid")
-    @Indexed(unique = true)
+    @Field("userId")
+   // @Indexed(unique = true)
     private String userId;
-    @Field("title") // books
-    private String title;
-
-    /////
-    @Field("price")
-    private String totalePrice;
+    @Field("bookId") // books
+    private String bookId;
     
+    private List<Book> books;
+
     
 
-    public Cart(String id, String title, String userId, String totalPrice)
+    public Cart(String id, String bookId, String userId, List<Book> books)
     {
         this.id = id;
         this.userId = userId;
-        this.title = title;
-        this.totalePrice = totalPrice;
+        this.bookId = bookId;
+        this.books = books;
     }
 
     public String getId()
@@ -55,24 +57,24 @@ public class Cart {
         this.userId = userId;
     }
 
-    public String getTitle()
+    public String getBookId()
     {
-        return title;
+        return bookId;
     }
 
-    public void setTitle(String title)
+    public void setTitle(String bookId)
     {
-        this.title = title;
+        this.bookId = bookId;
     }
 
-    public String getTotalPrice()
-    {
-        return totalePrice;
+    public List<Book> getCart() {
+        return books;
     }
 
-    public void setTotalPrice(String totalPrice)
-    {
-        this.totalePrice = totalPrice;
+    public void setCart(String id, List<Book> books) {
+        this.books = books;
+        this.id = id;
     }
-    /////////////////
+
 }
+
