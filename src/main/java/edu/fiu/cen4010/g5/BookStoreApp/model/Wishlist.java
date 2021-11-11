@@ -1,6 +1,7 @@
 package edu.fiu.cen4010.g5.BookStoreApp.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -10,6 +11,61 @@ public class Wishlist {
     @Id
     public String id;
     @Field("userid")
-    private String userId;
+    @Indexed(unique = true)
+    private String userid;
+    @Field("isbn")
+    @Indexed(unique = true)
+    private String ISBN;
+    @Field("title")
+    private String title;
+    @Field("genre")
+    private Genre genre;
 
+    public Wishlist(String id,String userid, String ISBN, String title, Genre genre) {
+        this.id = id;
+        this.userid = userid;
+        this.ISBN = ISBN;
+        this.title = title;
+        this.genre = genre;
+
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+    public String getISBN() {
+        return ISBN;
+    }
+
+    public void setISBN(String bookid) {
+        this.ISBN = bookid;
+    }
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
 }

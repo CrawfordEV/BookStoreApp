@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import java.util.ArrayList;
 
 @Document("book")
 public class Book {
@@ -12,17 +13,37 @@ public class Book {
     private String id;
     @Field("isbn")
     @Indexed(unique = true)
-    private String ISBN;
+    private String isbn;
     @Field("title")
     private String title;
+    @Field("description")
+    private String description;
+    @Field("price")
+    private float price;
+    @Field("authors")
+    private ArrayList<String> authors;
     @Field("genre")
     private Genre genre;
+    @Field("publisher")
+    private String publisher;
+    @Field("yearpublished")
+    private String yearpublished;
+    @Field ("numsold")
+    private long numsold;
 
-    public Book(String id, String ISBN, String title, Genre genre) {
-        this.id = id;
-        this.ISBN = ISBN;
+    public Book(String isbn, String title, String description,
+                float price, ArrayList<String> authors, Genre genre, String publisher,
+                String yearpublished, long numsold) {
+
+        this.isbn = isbn;
         this.title = title;
+        this.description = description;
+        this.price = price;
+        this.authors = authors;
         this.genre = genre;
+        this.publisher = publisher;
+        this.yearpublished = yearpublished;
+        this.numsold = numsold;
     }
 
     public String getId() {
@@ -34,11 +55,11 @@ public class Book {
     }
 
     public String getISBN() {
-        return ISBN;
+        return isbn;
     }
 
-    public void setISBN(String ISBN) {
-        this.ISBN = ISBN;
+    public void setISBN(String isbn) {
+        this.isbn = isbn;
     }
 
     public String getTitle() {
@@ -49,6 +70,30 @@ public class Book {
         this.title = title;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public ArrayList<String> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(ArrayList<String> authors) {
+        this.authors = authors;
+    }
+
     public Genre getGenre() {
         return genre;
     }
@@ -56,4 +101,34 @@ public class Book {
     public void setGenre(Genre genre) {
         this.genre = genre;
     }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public String getYearPublished() {
+        return yearpublished;
+    }
+
+    public void setYearPublished(String yearpublished) {
+        this.yearpublished = yearpublished;
+    }
+
+    public long getNumSold() {
+        return numsold;
+    }
+
+    public void setNumSold(long numsold) {
+        this.numsold = numsold;
+    }
+
+    //@Override
+    //public String toString() {
+    //    return "Book [id=" + id + ", ISBN=" + ISBN + ", title=" + title + ", price="
+    //            + price + ", genre=" + genre +  "]";
+    //}
 }

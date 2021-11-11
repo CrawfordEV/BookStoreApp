@@ -35,9 +35,29 @@ public class BookController {
         return ResponseEntity.ok(bookService.getAllBooks());
     }
 
-    @GetMapping("/{isbn}")
-    public ResponseEntity<Book> getBookByISBN(@PathVariable String isbn) {
+    @GetMapping("/byISBN/{isbn}")
+    public ResponseEntity<List<Book>> getBookByISBN(@PathVariable String isbn) {
         return ResponseEntity.ok(bookService.getBookByISBN(isbn));
+    }
+
+    @GetMapping("/byAuthor/{author}")
+    public ResponseEntity<List<Book>> getBooksByAuthor(@PathVariable String author) {
+        return ResponseEntity.ok(bookService.getBooksByAuthor(author));
+    }
+
+    @GetMapping("/isvalid/{id}")
+    public boolean validateBook(@PathVariable String id) {
+        return bookService.validateBook(id);
+    }
+
+    @GetMapping("/ratinghigherthan/{value}")
+    public ResponseEntity<List<Book>> getBooksWithRatingAvgHigherThan(@PathVariable float value) {
+        return ResponseEntity.ok(bookService.getBooksWithAvgRatingHigherThan(value));
+    }
+
+    @GetMapping("/by/{quantity}/from/{position}")
+    public ResponseEntity<List<Book>> getSubset(@PathVariable int quantity, @PathVariable int position) {
+        return ResponseEntity.ok(bookService.getSubset(quantity, position));
     }
 
     @DeleteMapping("/{id}")
