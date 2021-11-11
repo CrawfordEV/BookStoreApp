@@ -110,11 +110,7 @@ public class CartService{
         return cartRepository.findAll();
     }
 
-    public List<Cart> getRatingsByUser(String userId) {
-        return cartRepository.findByUserId(userId).orElseThrow(() -> new RuntimeException(
-                String.format("Cannot find Ratings by User %s", userId)
-        ));
-    }
+   //below here are empty methods created while building for things to calm down
 
     public void createCart(String id) {
     }
