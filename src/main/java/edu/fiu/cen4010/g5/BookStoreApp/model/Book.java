@@ -46,6 +46,10 @@ public class Book {
         this.numsold = numsold;
     }
 
+    // don't delete, necessary for integration
+    public Book() {
+    }
+
     public String getId() {
         return id;
     }

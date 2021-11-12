@@ -41,13 +41,12 @@ public class Cart {
         this.userid = userid;
     }
 
-    public ArrayList<String> getCart() {
+    public ArrayList<String> getBooks() {
         return books;
     }
 
-    public void setCart(ArrayList<String> books) {
+    public void setBooks(ArrayList<String> books) {
         this.books = books;
     }
-
 }
 

@@ -54,7 +54,7 @@ public class CartService{
             Cart savedCart = repositoryResults.get();
 
             savedCart.setUserid(cart.getUserid());
-            savedCart.setCart(cart.getCart());
+            savedCart.setBooks(cart.getBooks());
 
             cartRepository.save(savedCart);
         }
@@ -79,12 +79,26 @@ public class CartService{
         // TODO: validate book with id
 
         Cart savedCart = repositoryResults.get();
+        ArrayList<String> booksInCart = savedCart.getBooks();
 
-        if (savedCart.getCart().contains(bookid)) {
-            throw new RuntimeException(String.format("This cart already contains Book with ID %s", bookid));
-        } else {
-            savedCart.getCart().add(bookid);
+        if (booksInCart == null) {
+            booksInCart = new ArrayList<String>();
+        }
+
+        // the cart is empty, so add the book and save
+        if (booksInCart.isEmpty()) {
+            booksInCart.add(bookid);
+            savedCart.setBooks(booksInCart);
             cartRepository.save(savedCart);
+        }
+
+        // the cart is not empty, so check to see if the book is already in the cart before adding
+        else {
+            if (!booksInCart.contains(bookid)) {
+                booksInCart.add(bookid);
+                savedCart.setBooks(booksInCart);
+                cartRepository.save(savedCart);
+            }
         }
     }
 
@@ -101,12 +115,19 @@ public class CartService{
         // TODO: validate book with id
 
         Cart savedCart = repositoryResults.get();
+        ArrayList<String> booksInCart = savedCart.getBooks();
 
-        if (savedCart.getCart().contains(bookid)) {
-            savedCart.getCart().remove(bookid);
+        if (booksInCart == null) {
+            booksInCart = new ArrayList<String>();
+            savedCart.setBooks(booksInCart);
             cartRepository.save(savedCart);
-        } else {
-            throw new RuntimeException(String.format("This cart does not contain Book with ID %s", bookid));
+        }
+
+        // if the cart is not empty, remove the book
+        if (!booksInCart.isEmpty()) {
+            booksInCart.remove(bookid);
+            savedCart.setBooks(booksInCart);
+            cartRepository.save(savedCart);
         }
     }
 
@@ -118,13 +139,24 @@ public class CartService{
         // if no cart with this id is found, throw an error
         if (repositoryResults.isEmpty()) {
             throw new RuntimeException(String.format("Cannot find Cart with ID %s", cartid));
-        } else {
+        }
+
+        else {
             Cart cart = repositoryResults.get();
-            ArrayList<String> bookids = cart.getCart();
+            ArrayList<String> booksInCart = cart.getBooks();
+
+            if (booksInCart == null) {
+                booksInCart = new ArrayList<String>();
+                cart.setBooks(booksInCart);
+                cartRepository.save(cart);
+            }
+
             ArrayList<Book> books = new ArrayList<>();
 
-            for (String c : bookids) {
-                books.add(getBookInfo(c));
+            if (!booksInCart.isEmpty()) {
+                for (String c : booksInCart) {
+                    books.add(getBookInfo(c));
+                }
             }
 
             return books;
@@ -134,7 +166,7 @@ public class CartService{
     private Book getBookInfo(String bookID) {
 
         // This path should ultimately be set based on production server installation/configuration, not hard coded
-        String uri = "http://localhost:8080/api/book//byID/";
+        String uri = "http://localhost:8080/api/book/byID/";
         uri += bookID;
 
         RestTemplate restTemplate = new RestTemplate();

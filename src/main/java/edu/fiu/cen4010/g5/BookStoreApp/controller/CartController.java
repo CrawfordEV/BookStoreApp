@@ -46,7 +46,7 @@ public class CartController {
 
     // APIs for the CONTENTS of a specific cart (e.g. get/add/remove books)
 
-    @GetMapping("/{cartid}/contents")
+    @GetMapping("/{cartid}")
     public ResponseEntity<List<Book>> getCartContents(@PathVariable String cartid){
         return ResponseEntity.ok(cartService.getCartContents(cartid));
     }
