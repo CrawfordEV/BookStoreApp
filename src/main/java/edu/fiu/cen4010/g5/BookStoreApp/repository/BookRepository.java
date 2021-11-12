@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface BookRepository extends MongoRepository<Book, String> {
 
     @Query("{'id': ?0}")
-    Optional<List<Book>> findByBookId(String id);
+    Optional<Book> findById(String id);
 
     @Query("{'isbn': ?0}")
     Optional<List<Book>> findByISBN(String isbn);

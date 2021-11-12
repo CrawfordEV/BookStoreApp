@@ -17,18 +17,15 @@ public class Author {
     private String biography;
     @Field("publisher")
     private String publisher;
-    //no field needed here
-    private String fullName;
 
     public Author(String firstname, String lastname, String biography, String publisher) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.biography = biography;
         this.publisher = publisher;
-        this.fullName = fullName();
     }
 
-    public String fullName(){
+    public String getFullName(){
         return firstname + " " + lastname;
     }
 
@@ -70,14 +67,6 @@ public class Author {
 
     public void setPublisher(String publisher){
         this.publisher = publisher;
-    }
-
-    public String getFullName(){
-        return fullName;
-    }
-
-    public void setFullName(String fullName){
-        this.fullName = fullName;
     }
 
 }

@@ -126,9 +126,9 @@ public class Book {
         this.numsold = numsold;
     }
 
-    //@Override
-    //public String toString() {
-    //    return "Book [id=" + id + ", ISBN=" + ISBN + ", title=" + title + ", price="
-    //            + price + ", genre=" + genre +  "]";
-    //}
+    @Override
+    public String toString() {
+        return "Book [id=" + id + ", ISBN=" + isbn + ", title=" + title + ", price="
+                + price + ", genre=" + genre +  "]";
+    }
 }

@@ -11,11 +11,8 @@ import java.util.Optional;
 @Repository
 public interface RatingRepository extends MongoRepository<Rating, String> {
 
-//    Still trying to get "AND" functionality of DB query to work properly, but implemented logic
-//    in Java code for now in RatingService for Post/Put features
-////    @Query("{'userid': ?0}, 'bookid': ?1}")
-//    @Query("{'$and' : [{'userid': ?0}, 'bookid': ?1}]}")
-//    Optional<List<Rating>> findByUserIdAndBookId(String userid, String bookid);
+    @Query("{'id': ?0}")
+    Optional<Rating> findById(String id);
 
     @Query("{'userid': ?0}")
     Optional<List<Rating>> findByUserId(String userid);

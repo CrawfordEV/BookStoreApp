@@ -29,7 +29,6 @@ public class AuthorService {
         savedAuthor.setLastname(author.getLastname());
         savedAuthor.setBiography(author.getBiography());
         savedAuthor.setPublisher(author.getPublisher());
-        savedAuthor.setFullName(author.getFullName());
         authorRepository.save(savedAuthor);
     }
 

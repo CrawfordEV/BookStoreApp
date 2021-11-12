@@ -7,6 +7,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookService {
@@ -28,13 +29,13 @@ public class BookService {
     public void updateBook(Book book) {
         // TODO: Again, you can validate information being passed before updating a record
 
-        List<Book> searchResults = bookRepository.findByBookId(book.getId()).get();
+        Optional<Book> searchResults = bookRepository.findById(book.getId());
 
         if (searchResults.isEmpty()) {
             throw new RuntimeException(String.format("Cannot Find Book by ID %s", book.getId()));
         }
 
-        Book savedBook = searchResults.get(0);
+        Book savedBook = searchResults.get();
 
         savedBook.setISBN(book.getISBN());
         savedBook.setTitle(book.getTitle());
@@ -51,6 +52,12 @@ public class BookService {
 
     public List<Book> getAllBooks() {
         return bookRepository.findAll();
+    }
+
+    public Book getBookByID(String id) {
+        return bookRepository.findById(id).orElseThrow(() -> new RuntimeException(
+                String.format("Cannot find Book by ID %s", id)
+        ));
     }
 
     public List<Book> getBookByISBN(String isbn) {
@@ -80,11 +87,6 @@ public class BookService {
             return booksByAuthor;
         }
     }
-    //public Book getBookByPRICE(String PRICE) {
-        /*return bookRepository.findByPRICE(PRICE).orElseThrow(() -> new RuntimeException(
-                String.format("Cannot find Book by PRICE %s", PRICE)
-        ));*/
-    //}
 
     public void deleteBook(String id) {
         bookRepository.deleteById(id);
@@ -92,7 +94,7 @@ public class BookService {
 
     public boolean validateBook(String id) {
         // query the database for books with this id
-        List<Book> repositoryResults = bookRepository.findByBookId(id).get();
+        Optional<Book> repositoryResults = bookRepository.findById(id);
 
         // return true if there is a book with this id, and false if not
         return !repositoryResults.isEmpty();
@@ -124,7 +126,6 @@ public class BookService {
         return restTemplate.getForObject(uri, float.class);
     }
 
-
     public List<Book> getSubset(int quantity, int position) {
 
         List<Book> allBooks = getAllBooks();
@@ -142,6 +143,7 @@ public class BookService {
 
         return subSet;
     }
+
 }
 
 

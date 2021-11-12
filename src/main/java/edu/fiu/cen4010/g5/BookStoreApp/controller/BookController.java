@@ -35,6 +35,11 @@ public class BookController {
         return ResponseEntity.ok(bookService.getAllBooks());
     }
 
+    @GetMapping("/byID/{id}")
+    public ResponseEntity<Book> getBookByID(@PathVariable String id) {
+        return ResponseEntity.ok(bookService.getBookByID(id));
+    }
+
     @GetMapping("/byISBN/{isbn}")
     public ResponseEntity<List<Book>> getBookByISBN(@PathVariable String isbn) {
         return ResponseEntity.ok(bookService.getBookByISBN(isbn));
@@ -58,11 +63,6 @@ public class BookController {
     @GetMapping("/by/{quantity}/from/{position}")
     public ResponseEntity<List<Book>> getSubset(@PathVariable int quantity, @PathVariable int position) {
         return ResponseEntity.ok(bookService.getSubset(quantity, position));
-    }
-
-    @GetMapping("/price/{PRICE}")
-    public ResponseEntity<Book> getBookByPRICE(@PathVariable String PRICE) {
-        return ResponseEntity.ok(bookService.getBookByPRICE(PRICE));
     }
 
     @DeleteMapping("/id/{id}")

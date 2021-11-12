@@ -1,39 +1,23 @@
 package edu.fiu.cen4010.g5.BookStoreApp.model;
 
-
-
-import java.util.List;
-
-
-
-//import java.util.ArrayList;
-
 import org.springframework.data.annotation.Id;
-//import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.ArrayList;
 
 @Document("cart")
 public class Cart {
 
     @Id
     private String id;
-    @Field("userId")
-   // @Indexed(unique = true)
-    private String userId;
-    @Field("bookId") // books
-    private String bookId;
-    
-    private List<Book> books;
+    @Field("userid")
+    private String userid;
+    @Field("books")
+    private ArrayList<String> books;
 
-    
-
-    public Cart(String id, String bookId, String userId, List<Book> books)
-    {
-        this.id = id;
-        this.userId = userId;
-        this.bookId = bookId;
+    public Cart(String userid, ArrayList<String> books) {
+        this.userid = userid;
         this.books = books;
     }
 
@@ -47,33 +31,22 @@ public class Cart {
         this.id = id;
     }
 
-    public String getUserId()
+    public String getUserid()
     {
-        return userId;
+        return userid;
     }
 
-    public void setUserId(String userId)
+    public void setUserid(String userid)
     {
-        this.userId = userId;
+        this.userid = userid;
     }
 
-    public String getBookId()
-    {
-        return bookId;
-    }
-
-    public void setTitle(String bookId)
-    {
-        this.bookId = bookId;
-    }
-
-    public List<Book> getCart() {
+    public ArrayList<String> getCart() {
         return books;
     }
 
-    public void setCart(String id, List<Book> books) {
+    public void setCart(ArrayList<String> books) {
         this.books = books;
-        this.id = id;
     }
 
 }

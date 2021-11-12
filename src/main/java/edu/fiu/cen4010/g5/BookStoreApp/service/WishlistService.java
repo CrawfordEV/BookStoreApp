@@ -30,4 +30,5 @@ public class WishlistService {
                 String.format("Cannot find Ratings by User %s", userId)
         ));
     }
+
 }
