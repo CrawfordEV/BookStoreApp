@@ -48,6 +48,11 @@ public class BookService {
                 String.format("Cannot find Book by ISBN %s", isbn)
         ));
     }
+    public Book getBookByGenre(String genre) {
+        return bookRepository.findByISBN(genre).orElseThrow(() -> new RuntimeException(
+                String.format("Cannot find Book by ISBN %s", genre)
+        ));
+    }
 
     public List<Book> getBookByAuthor(String authorID) {
 

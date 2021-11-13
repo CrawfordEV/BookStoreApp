@@ -15,6 +15,9 @@ public interface BookRepository extends MongoRepository<Book, String> {
     @Query("{'id': ?0}")
     Optional<List<Book>> findByBookId(String id);
 
+    @Query("{'genre': ?0}")
+    Optional<List<Book>> findByBookGenre(String genre);
+
     //problem here, I cannot have a getAuthorByFullName
     //and a getAuthorByLastName
     //it confuses the fetcher.
