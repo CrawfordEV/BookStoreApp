@@ -17,4 +17,7 @@ public interface BookRepository extends MongoRepository<Book, String> {
     @Query("{'isbn': ?0}")
     Optional<List<Book>> findByISBN(String isbn);
 
+    @Query("{'genre': ?0}")
+    Optional<List<Book>> findByGenre(String genre);
+
 }

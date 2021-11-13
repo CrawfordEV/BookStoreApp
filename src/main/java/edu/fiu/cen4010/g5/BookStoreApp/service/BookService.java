@@ -144,6 +144,12 @@ public class BookService {
         return subSet;
     }
 
+    public List<Book> getBookByGenre(String genre) {
+        return bookRepository.findByGenre(genre).orElseThrow(() -> new RuntimeException(
+                String.format("Cannot find Book by Genre %s", genre)
+        ));
+    }
+
 }
 
 
