@@ -9,8 +9,6 @@ import java.util.ArrayList;
 @Document("book")
 public class Book {
 
-    // test for GITHUB
-
     @Id
     private String id;
     @Field("isbn")
