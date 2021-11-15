@@ -65,6 +65,16 @@ public class RatingController {
         return ResponseEntity.ok(ratingService.getRatingsByBookSortedAsc(bookid));
     }
 
+    @GetMapping("/allbooks/sorted/highest")
+    public ResponseEntity<List<Rating>> getRatingsByBookSortedDes() {
+        return ResponseEntity.ok(ratingService.getRatingsSortedDes());
+    }
+
+    @GetMapping("/allbooks/sorted/lowest")
+    public ResponseEntity<List<Rating>> getRatingsByBookSortedAsc() {
+        return ResponseEntity.ok(ratingService.getRatingsSortedAsc());
+    }
+
     @GetMapping("/avg/{bookid}")
     public ResponseEntity getAverageRating(@PathVariable String bookid) {
         return ResponseEntity.ok(ratingService.getAverageRating(bookid));
