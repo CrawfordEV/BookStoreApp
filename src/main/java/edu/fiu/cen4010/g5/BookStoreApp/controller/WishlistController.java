@@ -33,4 +33,17 @@ public class WishlistController {
     public ResponseEntity<List<Wishlist>> getWishlistByUser(@PathVariable String userid) {
         return ResponseEntity.ok(wishlistService.getWishlistByUser(userid));
     }
+
+    @GetMapping("/bywishlistname/{wishlistName}")
+    public ResponseEntity<List<Wishlist>> getWishlistByWishlistName(@PathVariable String wishlistName) {
+        return ResponseEntity.ok(wishlistService.getWishlistByWishlistName(wishlistName));
+    }
+
+    /**
+    @PutMapping
+    public ResponseEntity updateWishlistName(@RequestBody Wishlist wishlistName) {
+        wishlistService.updateWishlistName(wishlistName);
+        return ResponseEntity.ok(WishlistService.getAllWishlistName());
+    }
+    */
 }

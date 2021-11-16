@@ -20,13 +20,16 @@ public class Wishlist {
     private String title;
     @Field("genre")
     private Genre genre;
+    @Field("wishlist name")
+    private String wishlistName;
 
-    public Wishlist(String id,String userid, String ISBN, String title, Genre genre) {
+    public Wishlist(String id,String userid, String ISBN, String title, Genre genre, String wishlistName) {
         this.id = id;
         this.userid = userid;
         this.ISBN = ISBN;
         this.title = title;
         this.genre = genre;
+        this.wishlistName = wishlistName;
 
     }
 
@@ -67,5 +70,13 @@ public class Wishlist {
 
     public void setGenre(Genre genre) {
         this.genre = genre;
+    }
+
+    public String getwishlistName() {
+        return wishlistName;
+    }
+
+    public void setwishlistName(String wishlistName) {
+        this.wishlistName = wishlistName;
     }
 }
