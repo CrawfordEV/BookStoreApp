@@ -24,10 +24,16 @@ public class WishlistService {
     }
 
     public List<Wishlist> getWishlistByUser(String userId) {
-        // TODO: validate user
 
         return wishlistRepository.findByUserId(userId).orElseThrow(() -> new RuntimeException(
-                String.format("Cannot find Ratings by User %s", userId)
+                String.format("Cannot find user %s", userId)
+        ));
+    }
+
+    public List<Wishlist> getWishlistByWishlistName(String wishlistName) {
+
+        return wishlistRepository.findByWishlistName(wishlistName).orElseThrow(() -> new RuntimeException(
+                String.format("Cannot find wishlist %s", wishlistName)
         ));
     }
 
