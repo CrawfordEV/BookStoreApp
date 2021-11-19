@@ -1,6 +1,5 @@
 package edu.fiu.cen4010.g5.BookStoreApp.controller;
 
-import edu.fiu.cen4010.g5.BookStoreApp.model.Cart;
 import edu.fiu.cen4010.g5.BookStoreApp.model.Wishlist;
 import edu.fiu.cen4010.g5.BookStoreApp.service.WishlistService;
 import org.springframework.http.HttpStatus;
@@ -98,15 +97,5 @@ public class WishlistController {
         return ResponseEntity.ok(wishlistService.getWishlistByWishlistName(wishlistName));
     }
 
-
-    @PutMapping("/{wishlistname}/pushBook/{bookid}/toCart/{cartid}")
-    public void pushBookToCart(@PathVariable String wishlistname, @PathVariable String bookid, @PathVariable String cartid) {
-
-        wishlistService.pushBookToCart(wishlistname, bookid, cartid);
-    }
-
-     */
-
-
-
+    
 }
