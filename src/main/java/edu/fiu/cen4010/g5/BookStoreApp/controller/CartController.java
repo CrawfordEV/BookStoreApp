@@ -54,13 +54,13 @@ public class CartController {
     @PutMapping("/{cartid}/addBook/{bookid}")
     public ResponseEntity addBookToCart(@PathVariable String cartid, @PathVariable String bookid) {
         cartService.AddBookToCart(cartid, bookid);
-        return ResponseEntity.ok(cartService.getAllCarts());
+        return ResponseEntity.ok(cartService.getCartContents(cartid));
     }
 
     @PutMapping("/{cartid}/removeBook/{bookid}")
     public ResponseEntity removeBookFromCart(@PathVariable String cartid, @PathVariable String bookid) {
         cartService.RemoveBookFromCart(cartid, bookid);
-        return ResponseEntity.ok(cartService.getAllCarts());
+        return ResponseEntity.ok(cartService.getCartContents(cartid));
     }
 
 }
