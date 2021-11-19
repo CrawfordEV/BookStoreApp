@@ -55,6 +55,7 @@ public class WishlistService {
 
             savedWishlist.setUserid(wishlist.getUserid());
             savedWishlist.setBooks(wishlist.getBooks());
+            savedWishlist.setWishlistName(wishlist.getWishlistName());
 
             wishlistRepository.save(savedWishlist);
         }

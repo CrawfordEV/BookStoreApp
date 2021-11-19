@@ -15,10 +15,13 @@ public class Wishlist {
     private String userid;
     @Field("books")
     private ArrayList<String> books;
+    @Field("wishlist name")
+    private String wishlistName;
 
-    public Wishlist(String userid, ArrayList<String> books) {
+    public Wishlist(String userid, ArrayList<String> books, String wishlistName) {
         this.userid = userid;
         this.books = books;
+        this.wishlistName = wishlistName;
     }
 
     public String getId() {
@@ -43,5 +46,13 @@ public class Wishlist {
 
     public void setBooks(ArrayList<String> books) {
         this.books = books;
+    }
+
+    public String getWishlistName() {
+        return wishlistName;
+    }
+
+    public void setWishlistName(String wishlistName) {
+        this.wishlistName = wishlistName;
     }
 }
