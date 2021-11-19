@@ -1,7 +1,8 @@
 package edu.fiu.cen4010.g5.BookStoreApp.model;
 
+import java.util.ArrayList;
+
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -9,28 +10,15 @@ import org.springframework.data.mongodb.core.mapping.Field;
 public class Wishlist {
 
     @Id
-    public String id;
+    private String id;
     @Field("userid")
-    @Indexed(unique = true)
     private String userid;
-    @Field("isbn")
-    @Indexed(unique = true)
-    private String ISBN;
-    @Field("title")
-    private String title;
-    @Field("genre")
-    private Genre genre;
-    @Field("wishlist name")
-    private String wishlistName;
+    @Field("books")
+    private ArrayList<String> books;
 
-    public Wishlist(String id,String userid, String ISBN, String title, Genre genre, String wishlistName) {
-        this.id = id;
+    public Wishlist(String userid, ArrayList<String> books) {
         this.userid = userid;
-        this.ISBN = ISBN;
-        this.title = title;
-        this.genre = genre;
-        this.wishlistName = wishlistName;
-
+        this.books = books;
     }
 
     public String getId() {
@@ -49,34 +37,11 @@ public class Wishlist {
         this.userid = userid;
     }
 
-    public String getISBN() {
-        return ISBN;
+    public ArrayList<String> getBooks() {
+        return books;
     }
 
-    public void setISBN(String bookid) {
-        this.ISBN = bookid;
-    }
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Genre getGenre() {
-        return genre;
-    }
-
-    public void setGenre(Genre genre) {
-        this.genre = genre;
-    }
-
-    public String getwishlistName() {
-        return wishlistName;
-    }
-
-    public void setwishlistName(String wishlistName) {
-        this.wishlistName = wishlistName;
+    public void setBooks(ArrayList<String> books) {
+        this.books = books;
     }
 }
