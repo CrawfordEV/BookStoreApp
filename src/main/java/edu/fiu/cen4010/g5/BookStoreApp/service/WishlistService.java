@@ -65,6 +65,8 @@ public class WishlistService {
         wishlistRepository.deleteById(id);
     }
 
+    // Extended API functionality
+
     public void AddBookToWishlist(String wishlistid, String bookid) {
 
         // query the database for wishlists with this id
@@ -91,7 +93,7 @@ public class WishlistService {
             wishlistRepository.save(savedWishlist);
         }
 
-        // the wishlist is not empty, so check to see if the book is already in the cart before adding
+        // the wishlist is not empty, so check to see if the book is already in the wishlist before adding
         else {
             if (!booksInWishlist.contains(bookid)) {
                 booksInWishlist.add(bookid);
@@ -100,8 +102,6 @@ public class WishlistService {
             }
         }
     }
-    
-    //Remove book from wishlist
 
     public void RemoveBookFromWishlist(String wishlistid, String bookid) {
 
@@ -124,7 +124,7 @@ public class WishlistService {
             wishlistRepository.save(savedWishlist);
         }
 
-        // if the cart is not empty, remove the book
+        // if the wishlist is not empty, remove the book
         if (!booksInWishlist.isEmpty()) {
             booksInWishlist.remove(bookid);
             savedWishlist.setBooks(booksInWishlist);
@@ -174,38 +174,14 @@ public class WishlistService {
         return restTemplate.getForObject(uri, Book.class);
     }
 
-    /**
+    public void pushBookToCart(String wishlistID, String bookID, String cartID) {
 
-    public void addBook(Wishlist book) {
-        wishlistRepository.insert(book);
-    }
-
-    public List<Wishlist> getAllBooks() {
-        return wishlistRepository.findAll();
-    }
-
-    public List<Wishlist> getWishlistByUser(String userId) {
-
-        return wishlistRepository.findByUserId(userId).orElseThrow(() -> new RuntimeException(
-                String.format("Cannot find user %s", userId)
-        ));
-    }
-
-    public List<Wishlist> getWishlistByWishlistName(String wishlistName) {
-
-        return wishlistRepository.findByWishlistName(wishlistName).orElseThrow(() -> new RuntimeException(
-                String.format("Cannot find wishlist %s", wishlistName)
-        ));
-    }
-
-    public void pushBookToCart(String wishlistID, String cartID, String bookID) {
-
-        String uri = "http://localhost:8080/api/cart/" + cartID + "/addBook" + bookID;
+        String uri = "http://localhost:8080/api/cart/" + cartID + "/addBook/" + bookID;
 
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.put(uri, String.class);
 
-        // remove book from wishlist after successful
+        RemoveBookFromWishlist(wishlistID, bookID);
     }
-    */
+
 }

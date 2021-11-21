@@ -48,12 +48,7 @@ public class WishlistController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-
-
     // Extended functionality to add/remove books and display wishlist contents
-    // As well as push a book to a cart and remove from a wishlist
-
-    // APIs for the CONTENTS of a specific wishlist (e.g. get/add/remove books)
 
     @GetMapping("/{wishlistid}")
     public ResponseEntity<List<Book>> getWishlistContents(@PathVariable String wishlistid){
@@ -66,9 +61,16 @@ public class WishlistController {
         return ResponseEntity.ok(wishlistService.getWishlistContents(wishlistid));
     }
 
-    @PutMapping("/{wishlistId}/removeBook/{bookid}")
+    @PutMapping("/{wishlistid}/removeBook/{bookid}")
     public ResponseEntity removeBookFromWishlist(@PathVariable String wishlistid, @PathVariable String bookid) {
         wishlistService.RemoveBookFromWishlist(wishlistid, bookid);
         return ResponseEntity.ok(wishlistService.getWishlistContents(wishlistid));
     }
+
+    @PutMapping("/{wishlistid}/pushBook/{bookid}/toCart/{cartid}")
+    public ResponseEntity pushBookToCart(@PathVariable String wishlistid, @PathVariable String bookid, @PathVariable String cartid) {
+        wishlistService.pushBookToCart(wishlistid, bookid, cartid);
+        return ResponseEntity.ok(wishlistService.getWishlistContents(wishlistid));
+    }
+
 }

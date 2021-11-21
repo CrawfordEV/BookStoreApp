@@ -1,10 +1,10 @@
 package edu.fiu.cen4010.g5.BookStoreApp.model;
 
-import java.util.ArrayList;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+
+import java.util.ArrayList;
 
 @Document("wishlist")
 public class Wishlist {
@@ -15,7 +15,7 @@ public class Wishlist {
     private String userid;
     @Field("books")
     private ArrayList<String> books;
-    @Field("wishlist name")
+    @Field("wishlistName")
     private String wishlistName;
 
     public Wishlist(String userid, ArrayList<String> books, String wishlistName) {
