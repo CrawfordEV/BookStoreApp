@@ -4,6 +4,7 @@ import edu.fiu.cen4010.g5.BookStoreApp.model.Book;
 import edu.fiu.cen4010.g5.BookStoreApp.repository.BookRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.data.domain.Sort;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -148,6 +149,13 @@ public class BookService {
         return bookRepository.findByGenre(genre).orElseThrow(() -> new RuntimeException(
                 String.format("Cannot find Book by Genre %s", genre)
         ));
+    }
+
+    public List<Book> tenMostSold(){
+
+        List<Book> allBooks = bookRepository.findAll(Sort.by(Sort.Direction.ASC, "numsold"));
+        List<Book> subsetBooks = allBooks.subList(0,10);
+        return subsetBooks;
     }
 
 }
