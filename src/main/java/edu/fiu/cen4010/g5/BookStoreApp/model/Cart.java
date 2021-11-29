@@ -1,14 +1,10 @@
 package edu.fiu.cen4010.g5.BookStoreApp.model;
 
-
-
-//import java.util.ArrayList;
-
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.ArrayList;
 
 @Document("cart")
 public class Cart {
@@ -16,23 +12,13 @@ public class Cart {
     @Id
     private String id;
     @Field("userid")
-    @Indexed(unique = true)
-    private String userId;
-    @Field("title") // books
-    private String title;
+    private String userid;
+    @Field("books")
+    private ArrayList<String> books;
 
-    /////
-    @Field("price")
-    private String totalePrice;
-    
-    
-
-    public Cart(String id, String title, String userId, String totalPrice)
-    {
-        this.id = id;
-        this.userId = userId;
-        this.title = title;
-        this.totalePrice = totalPrice;
+    public Cart(String userid, ArrayList<String> books) {
+        this.userid = userid;
+        this.books = books;
     }
 
     public String getId()
@@ -45,34 +31,22 @@ public class Cart {
         this.id = id;
     }
 
-    public String getUserId()
+    public String getUserid()
     {
-        return userId;
+        return userid;
     }
 
-    public void setUserId(String userId)
+    public void setUserid(String userid)
     {
-        this.userId = userId;
+        this.userid = userid;
     }
 
-    public String getTitle()
-    {
-        return title;
+    public ArrayList<String> getBooks() {
+        return books;
     }
 
-    public void setTitle(String title)
-    {
-        this.title = title;
+    public void setBooks(ArrayList<String> books) {
+        this.books = books;
     }
-
-    public String getTotalPrice()
-    {
-        return totalePrice;
-    }
-
-    public void setTotalPrice(String totalPrice)
-    {
-        this.totalePrice = totalPrice;
-    }
-    /////////////////
 }
+

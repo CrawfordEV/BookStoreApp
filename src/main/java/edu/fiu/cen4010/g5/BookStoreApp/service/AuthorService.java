@@ -25,35 +25,16 @@ public class AuthorService {
                         String.format("Cannot Find Author by ID %s", author.getId())
                 ));
 
-        savedAuthor.setFirstName(author.getFirstName());
-        savedAuthor.setLastName(author.getLastName());
+        savedAuthor.setFirstname(author.getFirstname());
+        savedAuthor.setLastname(author.getLastname());
         savedAuthor.setBiography(author.getBiography());
         savedAuthor.setPublisher(author.getPublisher());
-        savedAuthor.setFullName(author.getFullName());
         authorRepository.save(savedAuthor);
     }
 
     public List<Author> getAllAuthors() {
         return authorRepository.findAll();
     }
-
-
-    public Author getAuthorByFullName(String fullName) {
-        return authorRepository.findByFullName(fullName).orElseThrow(() -> new RuntimeException(
-                String.format("Cannot find Author by ID %s", fullName)
-        ));
-    }
-/*
-    //problem here, I cannot have a getAuthorByFullName
-    //and a getAuthorByLastName
-    //it confuses the fetcher.
-
-    public Author getAuthorByLastName(String lastName) {
-        return authorRepository.findByLastName(lastName).orElseThrow(() -> new RuntimeException(
-                String.format("Cannot find the Author's last name %s", lastName)
-        ));
-    }
-    */
 
     public void deleteAuthor(String id) {
         authorRepository.deleteById(id);

@@ -8,13 +8,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CartRepository extends MongoRepository<Cart, String> {
-    
-     @Query("{'title': ?0}")
-    Optional<Cart> findByTitle(String title);
-
-    @Query("{'userid': ?0}")
-    Optional<List<Cart>> findByUserId(String userId);
 
     @Query("{'id': ?0}")
     Optional<Cart> findById(String id);
+
+    @Query("{'userid': ?0}")
+    Optional<List<Cart>> findByUserId(String userid);
+
 }
+
+  

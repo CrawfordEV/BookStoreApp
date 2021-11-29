@@ -20,6 +20,16 @@ public class RatingService {
         this.ratingRepository = ratingRepository;
     }
 
+    // Basic CRUD operation services
+
+    public List<Rating> getAllRatings() {
+        return ratingRepository.findAll();
+    }
+
+    public void deleteRating(String id) {
+        ratingRepository.deleteById(id);
+    }
+
     public void addRating(Rating rating) {
 
         // validate the user through a call to the User Controller
@@ -136,9 +146,7 @@ public class RatingService {
 
     }
 
-    public List<Rating> getAllRatings() {
-        return ratingRepository.findAll();
-    }
+    // Extended API services
 
     public List<Rating> getRatingsByUser(String userId) {
 
@@ -164,6 +172,20 @@ public class RatingService {
         ));
     }
 
+    public List<Rating> getRatingsSortedDes() {
+        List<Rating> unsortedRatings = getAllRatings();
+        unsortedRatings.sort(new RatingSortedByValueDes());
+
+        return unsortedRatings;
+    }
+
+    public List<Rating> getRatingsSortedAsc() {
+        List<Rating> unsortedRatings = getAllRatings();
+        unsortedRatings.sort(new RatingSortedByValueAsc());
+
+        return unsortedRatings;
+    }
+
     public List<Rating> getRatingsByBookSortedDes(String bookid) {
         // validation of book and existence of results performed in getRatingsByBook method
 
@@ -180,10 +202,6 @@ public class RatingService {
         unsortedRatings.sort(new RatingSortedByValueAsc());
 
         return unsortedRatings;
-    }
-
-    public void deleteRating(String id) {
-        ratingRepository.deleteById(id);
     }
 
     private boolean isUserValid(String userID) {

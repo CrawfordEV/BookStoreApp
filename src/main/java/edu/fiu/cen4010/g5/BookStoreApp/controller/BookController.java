@@ -35,19 +35,24 @@ public class BookController {
         return ResponseEntity.ok(bookService.getAllBooks());
     }
 
+    @GetMapping("/byID/{id}")
+    public ResponseEntity<Book> getBookByID(@PathVariable String id) {
+        return ResponseEntity.ok(bookService.getBookByID(id));
+    }
+
     @GetMapping("/byISBN/{isbn}")
-    public ResponseEntity<Book> getBookByISBN(@PathVariable String isbn) {
+    public ResponseEntity<List<Book>> getBookByISBN(@PathVariable String isbn) {
         return ResponseEntity.ok(bookService.getBookByISBN(isbn));
     }
 
     @GetMapping("/byGenre/{genre}")
-    public ResponseEntity<Book> getBookByGenre(@PathVariable String genre) {
+    public ResponseEntity<List<Book>> getBookByGenre(@PathVariable String genre) {
         return ResponseEntity.ok(bookService.getBookByGenre(genre));
     }
 
     @GetMapping("/byAuthor/{author}")
-    public ResponseEntity<List<Book>> getBookByAuthor(@PathVariable String authorID) {
-        return ResponseEntity.ok(bookService.getBookByAuthor(authorID));
+    public ResponseEntity<List<Book>> getBooksByAuthor(@PathVariable String author) {
+        return ResponseEntity.ok(bookService.getBooksByAuthor(author));
     }
 
     @GetMapping("/isvalid/{id}")
@@ -64,29 +69,16 @@ public class BookController {
     public ResponseEntity<List<Book>> getSubset(@PathVariable int quantity, @PathVariable int position) {
         return ResponseEntity.ok(bookService.getSubset(quantity, position));
     }
-
-<<<<<<< Updated upstream
-    @DeleteMapping("/{id}")
-=======
+    
     @GetMapping("/tenMostSold")
     public ResponseEntity<List<Book>> tenMostSold() {
         return ResponseEntity.ok(bookService.tenMostSold());
     }
-    
+
     @DeleteMapping("/id/{id}")
->>>>>>> Stashed changes
     public ResponseEntity deleteBook(@PathVariable String id) {
         bookService.deleteBook(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-
-    //problem here, I cannot have a getAuthorByFullName
-    //and a getAuthorByLastName
-    //it confuses the fetcher.
-
-    //@GetMapping("/{author}")
-    //public ResponseEntity<Book> getBookByAuthor(@PathVariable String author){
-     //   return ResponseEntity.ok(bookService.getBookByAuthor(author));
-    //}
 }

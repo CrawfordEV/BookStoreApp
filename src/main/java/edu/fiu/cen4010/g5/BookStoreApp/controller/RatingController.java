@@ -18,10 +18,17 @@ public class RatingController {
         this.ratingService = ratingService;
     }
 
+    // Basic CRUD operations for Ratings
+
     @PostMapping
     public ResponseEntity addRating(@RequestBody Rating rating) {
         ratingService.addRating(rating);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Rating>> getAllRatings() {
+        return ResponseEntity.ok(ratingService.getAllRatings());
     }
 
     @PutMapping
@@ -30,10 +37,13 @@ public class RatingController {
         return ResponseEntity.ok(ratingService.getAllRatings());
     }
 
-    @GetMapping
-    public ResponseEntity<List<Rating>> getAllRatings() {
-        return ResponseEntity.ok(ratingService.getAllRatings());
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteRating(@PathVariable String id) {
+        ratingService.deleteRating(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+
+    // Additional API functionality
 
     @GetMapping("/byuser/{userid}")
     public ResponseEntity<List<Rating>> getRatingsByUser(@PathVariable String userid) {
@@ -55,10 +65,14 @@ public class RatingController {
         return ResponseEntity.ok(ratingService.getRatingsByBookSortedAsc(bookid));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity deleteRating(@PathVariable String id) {
-        ratingService.deleteRating(id);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    @GetMapping("/allbooks/sorted/highest")
+    public ResponseEntity<List<Rating>> getRatingsByBookSortedDes() {
+        return ResponseEntity.ok(ratingService.getRatingsSortedDes());
+    }
+
+    @GetMapping("/allbooks/sorted/lowest")
+    public ResponseEntity<List<Rating>> getRatingsByBookSortedAsc() {
+        return ResponseEntity.ok(ratingService.getRatingsSortedAsc());
     }
 
     @GetMapping("/avg/{bookid}")
