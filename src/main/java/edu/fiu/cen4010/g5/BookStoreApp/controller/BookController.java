@@ -65,7 +65,16 @@ public class BookController {
         return ResponseEntity.ok(bookService.getSubset(quantity, position));
     }
 
+<<<<<<< Updated upstream
     @DeleteMapping("/{id}")
+=======
+    @GetMapping("/tenMostSold")
+    public ResponseEntity<List<Book>> tenMostSold() {
+        return ResponseEntity.ok(bookService.tenMostSold());
+    }
+    
+    @DeleteMapping("/id/{id}")
+>>>>>>> Stashed changes
     public ResponseEntity deleteBook(@PathVariable String id) {
         bookService.deleteBook(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

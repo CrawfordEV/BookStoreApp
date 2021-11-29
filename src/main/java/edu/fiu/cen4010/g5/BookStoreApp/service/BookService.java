@@ -2,6 +2,8 @@ package edu.fiu.cen4010.g5.BookStoreApp.service;
 
 import edu.fiu.cen4010.g5.BookStoreApp.model.Book;
 import edu.fiu.cen4010.g5.BookStoreApp.repository.BookRepository;
+
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -144,6 +146,7 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
+<<<<<<< Updated upstream
     public void addBook(Book book) {
         bookRepository.insert(book);
     }
@@ -208,5 +211,15 @@ public class BookService {
    // }
 
 }*/
+=======
+    public List<Book> tenMostSold(){
+
+        List<Book> allBooks = bookRepository.findAll(Sort.by(Sort.Direction.ASC, "numsold"));
+        List<Book> subsetBooks = allBooks.subList(0,10);
+        return subsetBooks;
+    }
+
+}
+>>>>>>> Stashed changes
 
 
