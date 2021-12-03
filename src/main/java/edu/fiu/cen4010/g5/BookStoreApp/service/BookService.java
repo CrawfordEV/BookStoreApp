@@ -153,7 +153,7 @@ public class BookService {
 
     public List<Book> tenMostSold(){
 
-        List<Book> allBooks = bookRepository.findAll(Sort.by(Sort.Direction.ASC, "numsold"));
+        List<Book> allBooks = bookRepository.findAll(Sort.by(Sort.Direction.DESC, "numsold"));
         List<Book> subsetBooks = allBooks.subList(0,10);
         return subsetBooks;
     }
