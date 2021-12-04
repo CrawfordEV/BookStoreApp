@@ -50,6 +50,11 @@ public class RatingController {
         return ResponseEntity.ok(ratingService.getRatingsByBookSortedDes(bookid));
     }
 
+    @GetMapping("/bybook/sorted/lowest/{bookid}")
+    public ResponseEntity<List<Rating>> getRatingsByBookSortedAsc(@PathVariable String bookid) {
+        return ResponseEntity.ok(ratingService.getRatingsByBookSortedAsc(bookid));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity deleteRating(@PathVariable String id) {
         ratingService.deleteRating(id);
